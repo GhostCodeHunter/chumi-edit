@@ -1,0 +1,88 @@
+/* Chumi.edit page loader. Shared by the landing page and the editor.
+   Sequence: ring draws, dot drops and lands, wordmark rises, then the dot floods the screen
+   in vermilion and the curtain lifts to show the page. Classes are added by js/boot.js. */
+.boot {
+  --k: 1;                      /* speed: 1 = full intro, .55 = quick repeat visit */
+  position: fixed; inset: 0; z-index: 9999;
+  display: grid; place-items: center;
+  background: #0e0f11; color: #f0eee8;
+  clip-path: inset(0 0 0 0);
+  overflow: hidden;
+  font-family: 'Bricolage Grotesque', 'Inter Display', 'Inter', system-ui, sans-serif;
+  animation: boot-failsafe 0s linear 14s forwards;   /* never trap the page if scripts fail */
+}
+@keyframes boot-failsafe { to { visibility: hidden; pointer-events: none; } }
+
+.boot-stage { position: relative; display: flex; flex-direction: column; align-items: center; gap: clamp(18px, 3.4vw, 28px); }
+.boot-mark { width: clamp(76px, 15vw, 104px); height: auto; overflow: visible; }
+
+.boot-ring {
+  fill: none; stroke: #f0eee8; stroke-width: 6.5; stroke-linecap: round;
+  stroke-dasharray: 1 1; stroke-dashoffset: 1.03;
+}
+.boot-dot {
+  fill: #ff5533; opacity: 0;
+  transform-box: fill-box; transform-origin: 50% 100%;
+}
+.boot-word {
+  margin: 0; display: flex; align-items: baseline; justify-content: center;
+  font-size: clamp(34px, 7.4vw, 54px); font-weight: 700; letter-spacing: -0.025em; line-height: 1;
+  font-optical-sizing: auto;
+}
+.boot-word .bw { display: inline-flex; overflow: hidden; padding: 0.06em 0 0.2em; margin: -0.06em 0 -0.2em; }
+.boot-word .bl { display: inline-block; transform: translateY(118%); }
+.boot-word .bl.dot { color: #ff5533; }
+.boot-word .bl.sub { color: #9a9ca3; }
+
+.boot-flood {
+  position: absolute; inset: 0; background: #ff5533;
+  clip-path: circle(0px at var(--fx, 50%) var(--fy, 50%));
+}
+
+/* 1. ring */
+.boot.b-ring .boot-ring { animation: boot-ring calc(1.05s * var(--k)) cubic-bezier(.65, 0, .25, 1) forwards; }
+@keyframes boot-ring { from { stroke-dashoffset: 1.03; } to { stroke-dashoffset: 0; } }
+/* 2. dot drops and lands */
+.boot.b-dot .boot-dot { animation: boot-drop calc(.75s * var(--k)) linear forwards; }
+@keyframes boot-drop {
+  0%   { transform: translateY(-30px) scale(.45); opacity: 0; animation-timing-function: cubic-bezier(.5, 0, .9, .45); }
+  10%  { opacity: 1; }
+  56%  { transform: translateY(0) scale(1); opacity: 1; animation-timing-function: ease-out; }
+  70%  { transform: translateY(0) scale(1.28, .7); }
+  86%  { transform: translateY(-3px) scale(.95, 1.06); }
+  100% { transform: none; opacity: 1; }
+}
+/* 3. wordmark rises, letter by letter */
+.boot.b-text .boot-word .bl {
+  animation: boot-rise calc(.7s * var(--k)) cubic-bezier(.2, .8, .15, 1) forwards;
+  animation-delay: calc(var(--i) * .045s * var(--k));
+}
+@keyframes boot-rise { from { transform: translateY(118%); } to { transform: none; } }
+/* waiting: the dot breathes until the page is ready */
+.boot.b-wait .boot-dot { animation: boot-breathe 1.1s ease-in-out infinite; }
+@keyframes boot-breathe { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.22); } }
+
+/* 4. exit: the dot floods the screen, then the curtain lifts */
+.boot.b-flood .boot-flood {
+  clip-path: circle(160vmax at var(--fx, 50%) var(--fy, 50%));
+  transition: clip-path .85s cubic-bezier(.7, 0, .2, 1);
+}
+.boot.b-flood .boot-stage { transition: opacity .3s ease .25s; opacity: 0; }
+.boot.b-lift {
+  clip-path: inset(0 0 100% 0);
+  transition: clip-path .95s cubic-bezier(.7, 0, .2, 1);
+  pointer-events: none;
+}
+
+/* app panels slide in under the curtain (editor only; harmless elsewhere) */
+html.is-booting { overflow: hidden; }
+
+@media (prefers-reduced-motion: reduce) {
+  .boot-ring { stroke-dashoffset: 0; }
+  .boot-dot { opacity: 1; }
+  .boot-word .bl { transform: none; }
+  .boot.b-ring .boot-ring, .boot.b-dot .boot-dot, .boot.b-text .boot-word .bl, .boot.b-wait .boot-dot { animation: none; }
+  .boot.b-flood .boot-flood { clip-path: circle(0px at 50% 50%); transition: none; }
+  .boot.b-flood .boot-stage { opacity: 1; transition: none; }
+  .boot.b-lift { clip-path: inset(0 0 0 0); opacity: 0; transition: opacity .3s ease; }
+}

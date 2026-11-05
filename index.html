@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Chumi.edit: edit photos in your browser</title>
+<meta name="description" content="Chumi.edit is a free photo editor that runs in your browser. Layers, selections, brushes, type, color adjustments and filters, and your pictures never leave your device.">
+<meta name="theme-color" content="#0e0f11">
+<meta property="og:title" content="Chumi.edit: edit photos in your browser">
+<meta property="og:description" content="Layers, selections, brushes, type and filters. Free, and nothing is uploaded.">
+<meta property="og:image" content="assets/ui-editor.webp">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Geist:wght@400..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/boot.css">
+<link rel="stylesheet" href="css/landing.css">
+</head>
+<body>
+
+<div id="boot" class="boot" role="status" aria-label="Loading Chumi.edit">
+  <div class="boot-flood" aria-hidden="true"></div>
+  <div class="boot-stage">
+    <svg class="boot-mark" viewBox="0 0 48 48" aria-hidden="true"><path class="boot-ring" pathLength="1" d="M31.25 13.75A14.5 14.5 0 1 0 31.25 34.25"/><circle class="boot-dot" cx="42" cy="37.2" r="4.6"/></svg>
+    <p class="boot-word" aria-hidden="true"><span class="bw"><span class="bl" style="--i:0">C</span><span class="bl" style="--i:1">h</span><span class="bl" style="--i:2">u</span><span class="bl" style="--i:3">m</span><span class="bl" style="--i:4">i</span><span class="bl dot" style="--i:5">.</span><span class="bl sub" style="--i:6">e</span><span class="bl sub" style="--i:7">d</span><span class="bl sub" style="--i:8">i</span><span class="bl sub" style="--i:9">t</span></span></p>
+  </div>
+</div>
+<noscript><style>.boot{display:none!important}</style></noscript>
+<script src="js/boot.js"></script>
+
+<a class="skip" href="#main">Skip to the page</a>
+
+<header class="nav" id="nav">
+  <div class="nav-in">
+    <a class="logo" href="#top" aria-label="Chumi.edit, back to the top">
+      <svg width="30" height="30" viewBox="0 0 48 48" aria-hidden="true"><path d="M31.25 13.75A14.5 14.5 0 1 0 31.25 34.25" fill="none" stroke="currentColor" stroke-width="6.5" stroke-linecap="round"/><circle cx="42" cy="37.2" r="4.6" fill="#ff5533"/></svg>
+      <span>Chumi<i>.</i>edit</span>
+    </a>
+    <nav class="nav-links" aria-label="Page">
+      <a href="#features">Features</a>
+      <a href="#tools">Tools</a>
+      <a href="#privacy">Privacy</a>
+      <a href="#faq">Questions</a>
+    </nav>
+    <a class="btn btn-small btn-primary" href="editor.html">Open editor</a>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- Hero: the live picture is the idea. The dot from the name is the handle. -->
+  <section class="hero" id="top" aria-labelledby="h1">
+    <h1 class="hero-title" id="h1"><span class="w"><span>Edit</span></span> <span class="w"><span>photos</span></span> <span class="w"><span>in</span></span> <span class="w"><span>your</span></span> <span class="w"><span>browser.</span></span></h1>
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <p class="lead">Layers, selections, brushes, type and color tools. Free to use, and your pictures never leave your device.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="editor.html">Open the editor</a>
+          <a class="btn btn-text" href="editor.html?sample=golden-lake">Try a sample picture</a>
+        </div>
+      </div>
+      <figure class="live" id="live">
+        <div class="live-frame">
+          <img class="live-img" id="liveImg" src="assets/golden-lake.jpg" alt="A violet and orange sunset over a still lake, with dark pine trees at the edges" width="2200" height="1300" fetchpriority="high">
+          <canvas class="live-canvas" id="liveCanvas" aria-hidden="true"></canvas>
+        </div>
+        <div class="live-ui">
+          <span class="live-end">As shot</span>
+          <div class="dial" id="dial" role="slider" tabindex="0" aria-label="Develop the picture" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100" aria-valuetext="Developed">
+            <span class="dial-track"><span class="dial-fill"></span></span>
+            <span class="dial-dot"></span>
+          </div>
+          <span class="live-end">Developed</span>
+        </div>
+        <div class="chips" id="chips" role="radiogroup" aria-label="Choose a look">
+          <button class="chip" type="button" role="radio" aria-checked="true" data-look="original">Natural</button>
+          <button class="chip" type="button" role="radio" aria-checked="false" data-look="vivid">Vivid</button>
+          <button class="chip" type="button" role="radio" aria-checked="false" data-look="bloom">Bloom</button>
+          <button class="chip" type="button" role="radio" aria-checked="false" data-look="vintage">Vintage</button>
+          <button class="chip" type="button" role="radio" aria-checked="false" data-look="noir">Noir</button>
+        </div>
+      </figure>
+    </div>
+  </section>
+
+  <!-- Samples -->
+  <section class="samples" id="samples" aria-labelledby="h-samples">
+    <div class="samples-head">
+      <h2 class="h2" id="h-samples" data-reveal>Start with a sample picture.</h2>
+      <p class="lead" data-reveal>Open any of these in the editor with one click, then try the tools on it.</p>
+    </div>
+    <ul class="samples-grid">
+      <li class="sample s1"><a href="editor.html?sample=golden-lake"><img src="assets/golden-lake.jpg" alt="Golden lake: a violet sunset over still water" width="2200" height="1300" loading="lazy"><span class="sample-name">Golden lake</span></a></li>
+      <li class="sample s2"><a href="editor.html?sample=neon-city"><img src="assets/neon-city.jpg" alt="Neon city: light trails on a road into a dark skyline" width="1800" height="1200" loading="lazy"><span class="sample-name">Neon city</span></a></li>
+      <li class="sample s3"><a href="editor.html?sample=desert-walk"><img src="assets/desert-walk.jpg" alt="Desert walk: a lone figure among warm sand dunes" width="1800" height="1200" loading="lazy"><span class="sample-name">Desert walk</span></a></li>
+      <li class="sample s4"><a href="editor.html?sample=pine-fog"><img src="assets/pine-fog.jpg" alt="Pine fog: rays of light through misty pine trees" width="1600" height="1200" loading="lazy"><span class="sample-name">Pine fog</span></a></li>
+      <li class="sample s5"><a href="editor.html?sample=sunrise-coast"><img src="assets/sunrise-coast.jpg" alt="Sunrise coast: a lighthouse on a headland at sunrise" width="1800" height="1200" loading="lazy"><span class="sample-name">Sunrise coast</span></a></li>
+    </ul>
+  </section>
+
+  <!-- Develop: scroll moves the same sliders as the editor, drawn by the same code. -->
+  <section class="develop paper" id="features" aria-labelledby="h-develop">
+    <div class="dev-stage">
+      <div class="dev-copy">
+        <h2 class="h2" id="h-develop">Develop a photo in four moves.</h2>
+        <p class="lead">Exposure, contrast, warmth and color are the same sliders you get in the editor. Scroll and watch them work.</p>
+        <ul class="dev-rows" id="devRows">
+          <li class="dev-row" data-k="exposure"><span class="dev-name">Exposure</span><span class="dev-val">0</span><span class="dev-track"><i></i></span></li>
+          <li class="dev-row" data-k="contrast"><span class="dev-name">Contrast</span><span class="dev-val">0</span><span class="dev-track"><i></i></span></li>
+          <li class="dev-row" data-k="temperature"><span class="dev-name">Warmth</span><span class="dev-val">0</span><span class="dev-track"><i></i></span></li>
+          <li class="dev-row" data-k="saturation"><span class="dev-name">Color</span><span class="dev-val">0</span><span class="dev-track"><i></i></span></li>
+        </ul>
+      </div>
+      <figure class="dev-pic" id="devPic">
+        <img class="live-img" id="devImg" src="assets/neon-city.jpg" alt="Neon city: light trails on a road into a dark skyline" width="1800" height="1200">
+        <canvas class="live-canvas" id="devCanvas" aria-hidden="true"></canvas>
+      </figure>
+    </div>
+  </section>
+
+  <!-- Layers -->
+  <section class="layers" id="layers" aria-labelledby="h-layers">
+    <div class="lay-stage">
+      <div class="lay-copy">
+        <h2 class="h2" id="h-layers">Stack it, hide it, reorder it.</h2>
+        <p class="lead">Every edit lives on its own layer. Drag to reorder, tap the eye to hide, and set the blend mode and opacity of each one.</p>
+      </div>
+      <div class="lay-cards" id="layCards" aria-hidden="true">
+        <figure class="lcard c-photo"><img src="assets/sunrise-coast.jpg" alt="" width="1800" height="1200"><figcaption>Sunrise coast</figcaption></figure>
+        <figure class="lcard c-sun"><span class="lcard-bg"></span><span class="sun"></span><figcaption>Sun</figcaption></figure>
+        <figure class="lcard c-text"><span class="lcard-bg"></span><span class="ltext">Golden hour</span><figcaption>Golden hour</figcaption></figure>
+      </div>
+      <figure class="lay-panel" id="layPanel">
+        <img src="assets/ui-layers.webp" alt="The Layers panel in Chumi.edit listing a text layer called Golden hour, a Sun shape layer and a Sunrise coast photo, with blend mode and opacity controls above" width="606" height="756">
+      </figure>
+    </div>
+  </section>
+
+  <!-- Tools: a horizontal ride through the tools. On small screens it is a swipeable row. -->
+  <section class="tools paper" id="tools" aria-labelledby="h-tools">
+    <div class="tools-pin" id="toolsPin">
+      <div class="tools-track" id="toolsTrack">
+        <article class="tp tp-intro">
+          <h2 class="h2" id="h-tools">Every tool you expect.</h2>
+          <p class="lead">Selections, brushes, type, filters and export, all in one window, and all of them a keystroke away.</p>
+        </article>
+
+        <article class="tp">
+          <div class="tp-copy">
+            <h3 class="h3">Select what you mean.</h3>
+            <p>Marquee, lasso and magic wand, with feathering, grow, shrink and invert. Marching ants show exactly what is selected.</p>
+          </div>
+          <figure class="tp-shot s-wide"><img src="assets/ui-select.webp" alt="A selection with marching ants around the sun in the Chumi.edit editor" width="2000" height="1120"></figure>
+        </article>
+
+        <article class="tp">
+          <div class="tp-copy">
+            <h3 class="h3">Paint, erase, clone, fill.</h3>
+            <p>Brush, eraser, clone stamp, bucket and gradient, each with its own size, hardness and opacity in the bar above the picture.</p>
+          </div>
+          <figure class="tp-shot s-wide"><img src="assets/ui-tools.webp" alt="The Chumi.edit toolbar beside the options bar for the brush tool" width="1800" height="840"></figure>
+        </article>
+
+        <article class="tp">
+          <div class="tp-copy">
+            <h3 class="h3">Type that stays editable.</h3>
+            <p>Sixteen fonts, weight, size, color, spacing and alignment. Change the words or the style whenever you like.</p>
+          </div>
+          <figure class="tp-shot s-tall"><img src="assets/ui-type.webp" alt="The text properties panel with font, size and weight controls" width="606" height="886"></figure>
+        </article>
+
+        <article class="tp">
+          <div class="tp-copy">
+            <h3 class="h3">Filters with a live preview.</h3>
+            <p>Blur, sharpen, glow, vignette, pixelate and more. Drag a slider, see the result on your picture, then apply it.</p>
+          </div>
+          <figure class="tp-shot s-mid"><img src="assets/ui-filter.webp" alt="The Glow filter dialog with radius, intensity and threshold sliders" width="1528" height="1022"></figure>
+        </article>
+
+        <article class="tp">
+          <div class="tp-copy">
+            <h3 class="h3">Find anything with Ctrl K.</h3>
+            <p>Every command lives in one search box, with its shortcut beside it. Type a few letters and press Enter.</p>
+          </div>
+          <figure class="tp-shot s-mid"><img src="assets/ui-palette.webp" alt="The command palette showing layer commands and their shortcuts" width="1328" height="1036"></figure>
+        </article>
+
+        <article class="tp">
+          <div class="tp-copy">
+            <h3 class="h3">Export what you need.</h3>
+            <p>PNG, JPG or WebP at the size you choose, saved straight to your device, or copied to the clipboard.</p>
+          </div>
+          <figure class="tp-shot s-sq"><img src="assets/ui-export.webp" alt="The export dialog with format, quality and size options" width="1008" height="914"></figure>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Privacy: the dot grows into the whole section. -->
+  <section class="privacy" id="privacy" aria-labelledby="h-privacy">
+    <div class="priv-field" id="privField">
+      <div class="priv-head">
+        <h2 class="h2" id="h-privacy">Nothing is ever uploaded.</h2>
+        <p class="lead">Chumi.edit runs entirely in this tab. Your pictures are opened, edited and exported on your device, and autosaved there too.</p>
+      </div>
+      <ul class="priv-list">
+        <li class="priv-item"><strong>No account.</strong><span>Open the editor and start. There is nothing to sign up for.</span></li>
+        <li class="priv-item"><strong>No upload.</strong><span>Files are read by your browser and never travel to a server.</span></li>
+        <li class="priv-item"><strong>No watermark.</strong><span>What you export is your picture and nothing else.</span></li>
+      </ul>
+    </div>
+    <span class="priv-dot" aria-hidden="true"></span>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq paper" id="faq" aria-labelledby="h-faq">
+    <div class="faq-grid">
+      <div class="faq-head">
+        <h2 class="h2" id="h-faq" data-reveal>Questions people ask.</h2>
+        <p class="lead" data-reveal>Short answers about files, saving and where your pictures live.</p>
+      </div>
+      <div class="faq-list">
+        <details class="qa" name="faq" open>
+          <summary>Is Chumi.edit free?</summary>
+          <p>Yes. It is free to use and nothing is locked behind a plan.</p>
+        </details>
+        <details class="qa" name="faq">
+          <summary>Do my pictures get uploaded?</summary>
+          <p>No. Everything happens inside your browser tab. Autosave keeps a copy in your browser's own storage so you can pick up where you left off, and that copy stays on your device.</p>
+        </details>
+        <details class="qa" name="faq">
+          <summary>Which files can I open?</summary>
+          <p>PNG, JPG, WebP, GIF, BMP, AVIF and SVG pictures, plus projects saved from Chumi.edit as .chumi.json. Photoshop PSD files are not supported.</p>
+        </details>
+        <details class="qa" name="faq">
+          <summary>How do I save my work?</summary>
+          <p>Export a PNG, JPG or WebP when you are done. To keep every layer and come back later, save the project as a .chumi.json file.</p>
+        </details>
+        <details class="qa" name="faq">
+          <summary>Can I undo a mistake?</summary>
+          <p>Yes. History keeps up to 70 steps, and you can click any step in the History panel to jump back to it.</p>
+        </details>
+        <details class="qa" name="faq">
+          <summary>Does it work on a phone?</summary>
+          <p>Yes. On small screens the panels fold into a drawer. Editing is most comfortable on a tablet or a computer.</p>
+        </details>
+        <details class="qa" name="faq">
+          <summary>Where are the keyboard shortcuts?</summary>
+          <p>Press Ctrl K, or Cmd K on a Mac, to search every command with its shortcut. The full list is also under Help, then Keyboard shortcuts.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Closing -->
+  <section class="cta" aria-labelledby="h-cta">
+    <h2 class="h2" id="h-cta" data-reveal>Open a photo and begin.</h2>
+    <div class="cta-actions" data-reveal>
+      <a class="btn btn-primary btn-big" href="editor.html">Open the editor</a>
+      <a class="btn btn-text" href="editor.html?sample=pine-fog">Or try a sample</a>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <p class="foot-word" aria-label="Chumi.edit"><span class="fw" aria-hidden="true"><span class="bl">C</span><span class="bl">h</span><span class="bl">u</span><span class="bl">m</span><span class="bl">i</span><span class="bl dot">.</span><span class="bl sub">e</span><span class="bl sub">d</span><span class="bl sub">i</span><span class="bl sub">t</span></span></p>
+  <div class="foot-row">
+    <nav class="foot-links" aria-label="Footer">
+      <a href="editor.html">Editor</a>
+      <a href="#features">Features</a>
+      <a href="#tools">Tools</a>
+      <a href="#privacy">Privacy</a>
+      <a href="#faq">Questions</a>
+    </nav>
+    <p class="foot-note">Chumi.edit. Photo editing that stays in your browser.</p>
+  </div>
+</footer>
+
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script defer src="js/adjust.js"></script>
+<script defer src="js/landing.js"></script>
+</body>
+</html>
