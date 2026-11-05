@@ -649,7 +649,7 @@
     const cont = h('div', { class: 'wl-continue', hidden: true });
     w.appendChild(h('div', { class: 'wl-inner' },
       h('h1', { class: 'wl-title', text: 'What are we editing?' }),
-      h('p', { class: 'wl-lead', text: 'Drop a picture anywhere on this window, or choose one. Everything stays on your device.' }),
+      h('p', { class: 'wl-lead', text: 'Drop a picture anywhere on this window, or choose one. It stays on your device unless you choose to send it.' }),
       h('div', { class: 'wl-actions' },
         h('button', { class: 'btn primary big', type: 'button', onclick: function () { ui.openFileDialog(false); } }, ic('i-open', 18), h('span', { text: 'Open a photo' })),
         h('button', { class: 'btn big', type: 'button', onclick: function () { ui.newDialog(); } }, ic('i-new', 18), h('span', { text: 'New canvas' }))),

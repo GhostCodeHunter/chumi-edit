@@ -208,7 +208,7 @@
   ui.runCmd = runCmd;
 
   /* ------------------------------------------------------------ menu bar */
-  const MENUS = ['File', 'Edit', 'Image', 'Layer', 'Filter', 'View', 'Help'];
+  const MENUS = ['File', 'Edit', 'Image', 'Layer', 'Filter', 'AI', 'View', 'Help'];
   let openName = null, closeOutside = null;
   function closeMenus() {
     document.querySelectorAll('.menu-pop').forEach(function (m) { m.remove(); });
@@ -320,7 +320,7 @@
 
   ui.initKeyboard = function () {
     document.addEventListener('keydown', function (e) {
-      if (document.querySelector('dialog[open]')) return;
+      if (document.querySelector('dialog[open]') || ui.locked) return;
       if (isTyping(e)) return;
       if (e.key === ' ' && !e.repeat) {
         if (document.activeElement && /BUTTON|A/.test(document.activeElement.tagName) && document.activeElement.closest('#menubar, #toolbar, #panels, #optbar, #topbar')) return;
@@ -593,7 +593,7 @@
   ui.aboutDialog = function () {
     ui.dialog({
       title: 'About Chumi.edit', body: h('div', { class: 'form' },
-        h('p', { class: 'dlg-text', text: 'Chumi.edit is a photo editor that runs entirely in your browser. Your pictures are never uploaded anywhere; editing happens on your own device.' }),
+        h('p', { class: 'dlg-text', text: 'Chumi.edit is a photo editor that runs in your browser. Editing, and the smart tools such as Remove background, happen on your own device. The one tool that can send anything out is Generative fill with a description, and only after you confirm what is sent and where.' }),
         h('p', { class: 'dlg-text', text: 'It works with layers, selections, brushes, text, shapes, color adjustments and filters, and it exports PNG, JPG and WebP. It does not open or save PSD files.' }),
         h('p', { class: 'dlg-text', text: 'The sample photographs are drawn in code, so you can practice without opening one of your own.' })),
       actions: [{ label: 'Close', primary: true }]
@@ -608,6 +608,7 @@
       { sel: '#stage', title: 'Work on the canvas', text: 'Scroll to zoom. Hold Space and drag to move around. Drop more photos here to add them as layers.', side: 'center' },
       { sel: '#layersPanel', title: 'Think in layers', text: 'Each photo, shape and piece of text sits on its own layer. Reorder, hide or blend them without losing anything.', side: 'left' },
       { sel: '#panelTabs', title: 'Adjust the look', text: 'Adjust changes color and tone without touching the pixels. Properties edits the selected text, shape or position.', side: 'left' },
+      { sel: '.menu-btn[data-menu="AI"]', title: 'Smart tools', text: 'Remove a background, select the subject or paint something out. Generative fill asks before it sends anything off your device.', side: 'bottom' },
       { sel: '#cmdBtn', title: 'Find anything fast', text: 'Press ' + ui.fmtKey('mod+k') + ' and type what you want to do. Every command and filter is in there.', side: 'bottom' }
     ];
     let i = 0;
@@ -617,6 +618,7 @@
     function key(e) { if (e.key === 'Escape') { e.stopPropagation(); end(); } }
     function place() {
       const s = steps[i], el = $(s.sel); if (!el) { next(); return; }
+      if (el.scrollIntoView) el.scrollIntoView({ inline: 'nearest', block: 'nearest' }); /* a menu button can sit past the edge of a narrow menu bar */
       const r = el.getBoundingClientRect();
       const small = s.sel === '#stage';
       ring.style.cssText = small ? 'left:' + (r.left + r.width / 2 - 140) + 'px;top:' + (r.top + r.height / 2 - 90) + 'px;width:280px;height:180px;opacity:0' : 'left:' + (r.left - 4) + 'px;top:' + (r.top - 4) + 'px;width:' + (r.width + 8) + 'px;height:' + (r.height + 8) + 'px';

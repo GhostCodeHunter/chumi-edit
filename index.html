@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Chumi.edit: edit photos in your browser</title>
-<meta name="description" content="Chumi.edit is a free photo editor that runs in your browser. Layers, selections, brushes, type, color adjustments and filters, and your pictures never leave your device.">
+<meta name="description" content="A free photo editor in your browser. Layers, selections, brushes, type, filters, remove background and generative fill. Pictures stay on your device unless you choose to send them.">
 <meta name="theme-color" content="#0e0f11">
 <meta property="og:title" content="Chumi.edit: edit photos in your browser">
-<meta property="og:description" content="Layers, selections, brushes, type and filters. Free, and nothing is uploaded.">
+<meta property="og:description" content="Layers, brushes, filters, remove background and generative fill. Free, and your pictures stay on your device unless you opt in.">
 <meta property="og:image" content="assets/ui-editor.webp">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -53,7 +53,7 @@
     <h1 class="hero-title" id="h1"><span class="w"><span>Edit</span></span> <span class="w"><span>photos</span></span> <span class="w"><span>in</span></span> <span class="w"><span>your</span></span> <span class="w"><span>browser.</span></span></h1>
     <div class="hero-grid">
       <div class="hero-copy">
-        <p class="lead">Layers, selections, brushes, type and color tools. Free to use, and your pictures never leave your device.</p>
+        <p class="lead">Layers, brushes, type, color tools and smart tools like remove background. Free to use, and your pictures stay on your device by default.</p>
         <div class="hero-actions">
           <a class="btn btn-primary" href="editor.html">Open the editor</a>
           <a class="btn btn-text" href="editor.html?sample=golden-lake">Try a sample picture</a>
@@ -142,7 +142,15 @@
       <div class="tools-track" id="toolsTrack">
         <article class="tp tp-intro">
           <h2 class="h2" id="h-tools">Every tool you expect.</h2>
-          <p class="lead">Selections, brushes, type, filters and export, all in one window, and all of them a keystroke away.</p>
+          <p class="lead">Smart tools, selections, brushes, type, filters and export, all in one window, and all of them a keystroke away.</p>
+        </article>
+
+        <article class="tp">
+          <div class="tp-copy">
+            <h3 class="h3">Smart tools, in one menu.</h3>
+            <p>Remove a background, select the subject, blur what is behind it, or paint an object out. Add a description to Generative fill to put something new in its place.</p>
+          </div>
+          <figure class="tp-shot s-wide"><img src="assets/ui-ai.webp" alt="The AI menu open over a photo with a selection, listing remove background, select subject, blur background, generative fill, content-aware fill and the remove brush" width="2000" height="1120"></figure>
         </article>
 
         <article class="tp">
@@ -200,13 +208,13 @@
   <section class="privacy" id="privacy" aria-labelledby="h-privacy">
     <div class="priv-field" id="privField">
       <div class="priv-head">
-        <h2 class="h2" id="h-privacy">Nothing is ever uploaded.</h2>
-        <p class="lead">Chumi.edit runs entirely in this tab. Your pictures are opened, edited and exported on your device, and autosaved there too.</p>
+        <h2 class="h2" id="h-privacy">Private by default.</h2>
+        <p class="lead">Chumi.edit runs in this tab. Your pictures are opened, edited and exported on your device, and autosaved there too. The one exception is Generative fill, and it asks before it sends anything.</p>
       </div>
       <ul class="priv-list">
         <li class="priv-item"><strong>No account.</strong><span>Open the editor and start. There is nothing to sign up for.</span></li>
-        <li class="priv-item"><strong>No upload.</strong><span>Files are read by your browser and never travel to a server.</span></li>
-        <li class="priv-item"><strong>No watermark.</strong><span>What you export is your picture and nothing else.</span></li>
+        <li class="priv-item"><strong>On your device.</strong><span>Files are read by your browser, and the smart tools run there too. Nothing is sent to a server.</span></li>
+        <li class="priv-item"><strong>Asked first.</strong><span>Generative fill sends the area around your selection and your description to the service you pick, and only after you agree.</span></li>
       </ul>
     </div>
     <span class="priv-dot" aria-hidden="true"></span>
@@ -222,11 +230,15 @@
       <div class="faq-list">
         <details class="qa" name="faq" open>
           <summary>Is Chumi.edit free?</summary>
-          <p>Yes. It is free to use and nothing is locked behind a plan.</p>
+          <p>Yes. It is free to use, nothing is locked behind a plan, and exports carry no watermark.</p>
         </details>
         <details class="qa" name="faq">
           <summary>Do my pictures get uploaded?</summary>
-          <p>No. Everything happens inside your browser tab. Autosave keeps a copy in your browser's own storage so you can pick up where you left off, and that copy stays on your device.</p>
+          <p>Not by default. Editing, saving and the smart tools run inside your browser tab, and autosave keeps a copy in your browser's own storage on your device. The exception is Generative fill with a description: once you agree, it sends the area around your selection and your text to the service you choose, either the free AI Horde community or one you connect with your own key. With no description, it fills the area on your device instead.</p>
+        </details>
+        <details class="qa" name="faq">
+          <summary>How does Remove background work?</summary>
+          <p>It runs a small model on your device, so your picture is not sent anywhere. The first time you use it, Chumi.edit downloads the model from this site (about 5 MB) and a small engine from a public CDN, so you need a connection then. If the engine cannot load, it falls back to a simpler color-based cut-out and tells you.</p>
         </details>
         <details class="qa" name="faq">
           <summary>Which files can I open?</summary>
@@ -272,7 +284,7 @@
       <a href="#privacy">Privacy</a>
       <a href="#faq">Questions</a>
     </nav>
-    <p class="foot-note">Chumi.edit. Photo editing that stays in your browser.</p>
+    <p class="foot-note">Chumi.edit. Photo editing in your browser.</p>
   </div>
 </footer>
 

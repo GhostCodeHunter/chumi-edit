@@ -417,6 +417,42 @@ dialog.palette .dlg-body { padding: 0; overflow: hidden; }
 .tour-card p { color: var(--muted); margin-top: 6px; line-height: 1.5; }
 .tour-actions { display: flex; justify-content: space-between; gap: 8px; margin-top: 14px; }
 
+/* ------------------------------------------------------------ smart tools */
+.ai-bar { position: absolute; left: 50%; bottom: 18px; transform: translateX(-50%); z-index: 7; display: flex; align-items: center; gap: 2px; padding: 5px; max-width: calc(100% - 24px); overflow-x: auto; scrollbar-width: none; background: var(--panel-2); border: 1px solid var(--line-2); border-radius: 12px; box-shadow: 0 12px 32px rgba(0, 0, 0, .5); animation: bar-in .32s var(--ease); }
+.ai-bar::-webkit-scrollbar { display: none; }
+.ai-bar .btn { background: transparent; border-color: transparent; height: 32px; padding: 0 11px; color: var(--text); }
+.ai-bar .btn .ic { color: var(--muted); transition: color .15s; }
+.ai-bar .btn:hover:not(:disabled) { background: var(--panel-3); border-color: var(--line-2); }
+.ai-bar .btn:hover:not(:disabled) .ic { color: var(--accent); }
+.ai-bar .btn.primary { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+.ai-bar .btn.primary .ic, .ai-bar .btn.primary:hover:not(:disabled) .ic { color: var(--on-accent); }
+.ai-bar .btn.primary:hover:not(:disabled) { background: var(--accent-hi); border-color: var(--accent-hi); }
+.ai-bar .icon-btn { width: 28px; height: 28px; }
+.ai-bar .icon-btn[data-tip]:hover::after { top: auto; bottom: calc(100% + 9px); }
+.ai-sep { width: 1px; height: 20px; background: var(--line-2); margin: 0 4px; flex: none; }
+body.has-aibar #toasts { bottom: 94px; }
+@keyframes bar-in { from { opacity: 0; transform: translate(-50%, 8px); } to { opacity: 1; transform: translate(-50%, 0); } }
+
+.work-scrim { position: fixed; inset: 0; z-index: 180; display: grid; place-items: center; background: rgba(5, 6, 7, .38); cursor: progress; }
+.work-card { width: min(380px, calc(100vw - 32px)); background: var(--panel); border: 1px solid var(--line-2); border-radius: 14px; padding: 18px 20px 16px; box-shadow: 0 24px 60px rgba(0, 0, 0, .55); animation: dlg .22s var(--ease); cursor: default; }
+.work-card h3 { font: 700 18px/1.2 var(--font-display); letter-spacing: -.01em; }
+.work-text { color: var(--muted); margin-top: 6px; min-height: 1.45em; }
+.work-track { height: 6px; border-radius: 999px; background: var(--panel-3); margin-top: 14px; overflow: hidden; }
+.work-fill { height: 100%; width: 0; background: var(--accent); border-radius: inherit; transition: width .35s var(--ease); }
+.work-fill.indet { width: 40%; animation: work-slide 1.3s var(--ease) infinite; }
+@keyframes work-slide { 0% { transform: translateX(-100%); } 100% { transform: translateX(250%); } }
+.work-actions { display: flex; justify-content: flex-end; margin-top: 14px; }
+
+.gf-notice { color: var(--muted); font-size: 12.5px; line-height: 1.5; padding: 10px 12px; background: var(--panel-2); border: 1px solid var(--line); border-radius: var(--r); }
+.gf-own { display: flex; flex-direction: column; gap: 12px; }
+.gf-thumbs { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+.gf-thumb { padding: 3px; background: var(--panel-2); border: 2px solid var(--line-2); border-radius: 9px; line-height: 0; transition: border-color .15s; }
+.gf-thumb canvas { display: block; border-radius: 5px; max-width: 100%; height: auto; }
+.gf-thumb:hover { border-color: #5a606b; }
+.gf-thumb.on { border-color: var(--accent); }
+.gf-result { grid-template-columns: 1fr; }
+.gf-result .filter-preview { background-image: none; }
+
 #scrim { display: none; }
 
 /* ------------------------------------------------------------ narrow screens */
@@ -443,6 +479,8 @@ dialog.palette .dlg-body { padding: 0; overflow: hidden; }
   #topActions #exportBtn span { display: inline; }
 }
 @media (max-width: 640px) {
+  .ai-bar { bottom: 10px; }
+  .ai-bar .btn span { font-size: 12.5px; }
   .wl-samples { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .preset-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .filter-form { grid-template-columns: 1fr; }
