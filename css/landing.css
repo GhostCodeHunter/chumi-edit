@@ -37,10 +37,11 @@ button { font: inherit; color: inherit; }
 .w > span { display: inline-block; }
 
 /* buttons */
-.btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; height: 56px; padding: 0 28px; border-radius: 14px; border: 0; font: 600 17px/1 var(--ui); text-decoration: none; cursor: pointer; white-space: nowrap; transition: transform .25s var(--ease), background-color .2s ease, color .2s ease; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; height: 56px; padding: 0 28px; border-radius: 14px; border: 0; font: 600 17px/1 var(--ui); text-decoration: none; cursor: pointer; white-space: nowrap; transition: translate .25s var(--ease), scale .25s var(--ease), background-color .2s ease, color .2s ease; }
+/* hover and press use the individual translate/scale properties so they never fight GSAP's transform */
 .btn-primary { background: var(--accent); color: var(--on-accent); }
-.btn-primary:hover { background: var(--accent-hi); transform: translateY(-3px); }
-.btn-primary:active { transform: translateY(0) scale(.97); }
+.btn-primary:hover { background: var(--accent-hi); translate: 0 -3px; }
+.btn-primary:active { translate: 0 0; scale: .97; }
 .btn-text { padding: 0 10px; color: inherit; text-underline-offset: 6px; text-decoration-thickness: 2px; }
 .btn-text:hover { text-decoration-line: underline; text-decoration-color: var(--accent); }
 .btn-small { height: 44px; padding: 0 20px; font-size: 15px; border-radius: 12px; }
@@ -77,9 +78,9 @@ button { font: inherit; color: inherit; }
 .dial:hover .dial-dot, .dial.is-drag .dial-dot { transform: scale(1.28); }
 .dial:focus-visible .dial-dot { outline: 3px solid var(--text); outline-offset: 4px; }
 .chips { display: flex; flex-wrap: wrap; gap: 10px; }
-.chip { height: 44px; padding: 0 20px; border: 0; border-radius: 99px; background: var(--ground-3); color: var(--text); font: 500 15px/1 var(--ui); cursor: pointer; transition: background-color .2s ease, color .2s ease, transform .2s var(--ease); }
-.chip:hover { background: var(--ground-4); transform: translateY(-2px); }
-.chip:active { transform: scale(.96); }
+.chip { height: 44px; padding: 0 20px; border: 0; border-radius: 99px; background: var(--ground-3); color: var(--text); font: 500 15px/1 var(--ui); cursor: pointer; transition: background-color .2s ease, color .2s ease, translate .2s var(--ease), scale .2s var(--ease); }
+.chip:hover { background: var(--ground-4); translate: 0 -2px; }
+.chip:active { scale: .96; }
 .chip[aria-checked="true"] { background: var(--paper); color: var(--ink); }
 
 /* samples */
@@ -248,5 +249,5 @@ button { font: inherit; color: inherit; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; animation-delay: 0s !important; }
-  .btn-primary:hover, .chip:hover { transform: none; }
+  .btn-primary:hover, .chip:hover { translate: none; }
 }
